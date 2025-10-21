@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.domain;
 
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -39,7 +39,7 @@ public class Car {
         }
     }
 
-    public String printPosition() {
+    public String getStatusPosition() {
         StringBuilder result = new StringBuilder();
         for(int i = 0; i < position; i++) {
             result.append("-");

@@ -1,7 +1,5 @@
 package racingcar.controller;
 
-import java.util.List;
-import racingcar.domain.Car;
 import racingcar.domain.Game;
 import racingcar.service.GameService;
 import racingcar.view.InputView;
@@ -12,10 +10,30 @@ public class GameController {
     private final GameService gameService = new GameService();
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+    private Game game;
 
     public void run() {
-        outputView.init();
-        String names = inputView.readLine().trim();
-        gameService.CreateCarList(names);
+        gameStart();
+        gameCount();
     }
+
+    private void gameStart() {
+        outputView.init();
+        readCarNames();
+        gameCount();
+    }
+
+    private void readCarNames() {
+        String names = inputView.readLine().trim();
+        this.game = gameService.CreateGame(names);
+    }
+
+    private void gameCount() {
+        outputView.gameCounting();
+        String countString = inputView.readLine();
+        int count = Integer.parseInt(countString);
+        this.game.playRounds(count);
+    }
+
+
 }

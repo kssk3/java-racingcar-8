@@ -9,11 +9,9 @@ public class GameService {
 
     private static final String DEFAULT_DELIMITER = ",";
 
-    private Game game;
-    private Validator validator;
+    private final Validator validator;
 
     public GameService() {
-        this.game = new Game();
         this.validator = new Validator();
     }
 
@@ -25,6 +23,9 @@ public class GameService {
             validator.validate(name);
             cars.add(new Car(name));
         }
+
         return new Game(cars);
     }
+
+
 }

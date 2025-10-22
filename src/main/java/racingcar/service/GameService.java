@@ -8,6 +8,7 @@ import racingcar.domain.Game;
 public class GameService {
 
     private static final String DEFAULT_DELIMITER = ",";
+    private static final String NUMBER_EXCEPTION = "숫자가 아닌 다른값이 입력되었습니다.";
 
     private final Validator validator;
 
@@ -27,5 +28,12 @@ public class GameService {
         return new Game(cars);
     }
 
+    public int getCount(String input) {
+        try{
+            return Integer.parseInt(input);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException(NUMBER_EXCEPTION);
+        }
+    }
 
 }

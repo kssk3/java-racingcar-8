@@ -13,26 +13,29 @@ public class GameController {
     private Game game;
 
     public void run() {
+        gameInit();
         gameStart();
-        gameCount();
     }
 
-    private void gameStart() {
+    private void gameInit() {
         outputView.init();
         readCarNames();
-        gameCount();
     }
 
     private void readCarNames() {
-        String names = inputView.readLine().trim();
+        String names = inputView.readLine();
         this.game = gameService.CreateGame(names);
     }
 
-    private void gameCount() {
+    private void gameStart() {
+        int count = getGameCounting();
+        game.saveRounds(count);
+    }
+
+    private int getGameCounting() {
         outputView.gameCounting();
         String countString = inputView.readLine();
-        int count = Integer.parseInt(countString);
-        this.game.playRounds(count);
+        return gameService.getCount(countString);
     }
 
 

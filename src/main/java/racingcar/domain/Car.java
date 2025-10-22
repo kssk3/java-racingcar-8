@@ -10,11 +10,10 @@ public class Car {
     private static final int NAMING_LENGTH = 5;
     private static final String EXCEPTION_MESSAGE = "이름은 5자 이하만 가능합니다.";
 
-    private String name;
+    private final String name;
     private int position;
 
-    public Car(String name) {
-        validateNameLength(name);
+    public Car(final String name) {
         this.name = name;
         this.position = START_POSITION;
     }
@@ -23,11 +22,6 @@ public class Car {
         return Randoms.pickNumberInRange(0, 9);
     }
 
-    private void validateNameLength(String name) {
-        if (name.length() > NAMING_LENGTH) {
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
-        }
-    }
 
     private boolean isMovable() {
         return getMoveCount() >= MOVING_FORWARD;

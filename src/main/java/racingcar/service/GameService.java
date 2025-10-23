@@ -1,6 +1,6 @@
 package racingcar.service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import racingcar.domain.Car;
 import racingcar.domain.Game;
@@ -8,32 +8,39 @@ import racingcar.domain.Game;
 public class GameService {
 
     private static final String DEFAULT_DELIMITER = ",";
-    private static final String NUMBER_EXCEPTION = "숫자가 아닌 다른값이 입력되었습니다.";
+    private Game game = new Game();
 
-    private final Validator validator;
+    public Game createGameByNames(String input) {
+        List<String> names = Arrays.stream(input.split(DEFAULT_DELIMITER))
+                .map(String::trim)
+                .toList();
 
-    public GameService() {
-        this.validator = new Validator();
-    }
-
-    public Game CreateGame(String input) {
-        List<Car> cars = new ArrayList<>();
-
-        String[] names = input.split(DEFAULT_DELIMITER);
-        for(String name : names) {
-            validator.validate(name);
-            cars.add(new Car(name));
+        for (String name : names) {
+            Validator.validateCarNameInput(name);
+            game.addCar(new Car(name));
         }
 
-        return new Game(cars);
+        return game;
     }
 
-    public int getCount(String input) {
-        try{
-            return Integer.parseInt(input);
-        }catch (NumberFormatException e){
-            throw new IllegalArgumentException(NUMBER_EXCEPTION);
-        }
+    public int parseAndGetRounds(String input) {
+        Validator.validateRoundInput(input);
+        return Integer.parseInt(input);
     }
 
+    public void moveAllCars() {
+        game.getCars().moveAllCars();
+    }
+
+    public List<Car> getAllCars() {
+        return game.getCarList();
+    }
+
+    public String createWinnersString() {
+        List<String> winnerNames = game.findWinners().stream()
+                .map(Car::getName)
+                .toList();
+
+        return String.join(", ", winnerNames);
+    }
 }

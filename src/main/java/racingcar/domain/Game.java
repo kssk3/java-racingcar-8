@@ -4,17 +4,42 @@ import java.util.List;
 
 public class Game {
 
-    private final List<Car> cars;
+    private static final int DEFAULT_INITIAL_ROUND = 0;
+
+    private Cars cars;
     private int rounds;
 
-    public Game(List<Car> cars) {
-        this.cars = cars;
+    public Game() {
+        this.cars = new Cars();
+        this.rounds = DEFAULT_INITIAL_ROUND;
     }
 
-    public void saveRounds(int count) {
+    public void addCar(Car car) {
+        this.cars.addCar(car);
+    }
+
+    public void saveTotalRound(int count) {
         this.rounds = count;
     }
 
+    public int getRounds() {
+        return rounds;
+    }
 
+    public List<Car> getCarList() {
+        return cars.getCars();
+    }
 
+    public Cars getCars() {
+        return cars;
+    }
+
+    public List<Car> findWinners() {
+        int maxPosition = getCarList().stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
+
+        return getCarList().stream().filter(car -> car.getPosition() == maxPosition).toList();
+    }
 }

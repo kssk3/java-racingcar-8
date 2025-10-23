@@ -14,29 +14,44 @@ public class GameController {
 
     public void run() {
         gameInit();
-        gameStart();
+        saveGameCounting();
+        processing();
+        gameResult();
     }
 
     private void gameInit() {
-        outputView.init();
+        outputView.printInputInfo();
         readCarNames();
     }
 
     private void readCarNames() {
         String names = inputView.readLine();
-        this.game = gameService.CreateGame(names);
+        this.game = gameService.createGameByNames(names);
     }
 
-    private void gameStart() {
+    private void saveGameCounting() {
         int count = getGameCounting();
-        game.saveRounds(count);
+        game.saveTotalRound(count);
     }
 
     private int getGameCounting() {
-        outputView.gameCounting();
+        outputView.printGameCounting();
         String countString = inputView.readLine();
-        return gameService.getCount(countString);
+        return gameService.parseAndGetRounds(countString);
     }
 
+    private void processing() {
+        outputView.printGameStatus();
+
+        for (int i = 0; i < game.getRounds(); i++) {
+            gameService.moveAllCars();
+            outputView.printRoundResult(gameService.getAllCars());
+            outputView.printNewLine();
+        }
+    }
+
+    private void gameResult() {
+        outputView.printResult(gameService.createWinnersString());
+    }
 
 }

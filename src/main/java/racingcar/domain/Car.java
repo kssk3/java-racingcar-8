@@ -5,17 +5,17 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Car {
 
     private static final int MOVING_FORWARD = 4;
-    private static final int START_POSITION = 0;
+    private static final int DEFAULT_POSITION = 0;
 
     private final String name;
     private int position;
 
     public Car(final String name) {
         this.name = name;
-        this.position = START_POSITION;
+        this.position = DEFAULT_POSITION;
     }
 
-    public void move() {
+    public void attemptToMove() {
         if (isMovable()) {
             position++;
         }

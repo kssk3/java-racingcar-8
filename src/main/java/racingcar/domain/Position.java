@@ -8,6 +8,9 @@ public class Position {
     private int value;
 
     private Position(int value) {
+        if(value < DEFAULT_POSITION) {
+            throw new IllegalArgumentException("위치는 0 이상이어야 합니다.");
+        }
         this.value = value;
     }
 
@@ -16,15 +19,15 @@ public class Position {
     }
 
     public Position move() {
-        return new Position(value + 1);
+        return new Position(this.value + 1);
     }
 
     public boolean isGreaterThan(Position other) {
-        return value > other.value;
+        return this.value > other.value;
     }
 
     public int getValue() {
-        return value;
+        return this.value;
     }
 
     @Override

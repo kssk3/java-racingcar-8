@@ -1,40 +1,45 @@
 package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.Objects;
 
 public class Car {
 
-    private static final int MOVING_FORWARD = 4;
-    private static final int DEFAULT_POSITION = 0;
+    private final CarName carName;
+    private Position position;
 
-    private final String name;
-    private int position;
-
-    public Car(final String name) {
-        this.name = name;
-        this.position = DEFAULT_POSITION;
+    public Car(CarName carName) {
+        this.carName = carName;
+        this.position = Position.initial();
     }
 
-    public void attemptToMove() {
-        if (isMovable()) {
-            position++;
+    public void move() {
+        int number = Randoms.pickNumberInRange(0, 9);
+        if (number >= 4) {
+            position = position.move();
         }
     }
 
-    private int getMoveCount() {
-        return Randoms.pickNumberInRange(0, 9);
+    public boolean isWinner(Position maxPosition) {
+        return this.position.equals(maxPosition);
     }
 
-    private boolean isMovable() {
-        return getMoveCount() >= MOVING_FORWARD;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Car car = (Car) o;
+        return Objects.equals(carName, car.carName) && Objects.equals(position, car.position);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public int hashCode() {
+        return Objects.hash(carName, position);
     }
 
-    public int getPosition() {
-        return position;
+    @Override
+    public String toString() {
+        return this.carName.getName() + " : " + "-".repeat(this.position.getValue());
     }
-
 }

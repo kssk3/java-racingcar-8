@@ -13,13 +13,17 @@ public class CarName {
     }
 
     private void validate(String name) {
-        if (name == null || name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException();
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("이름이 비어있습니다");
+        }
+
+        if (name.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException("이름은 5자 이하만 가능합니다.");
         }
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     @Override

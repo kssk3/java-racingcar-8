@@ -1,6 +1,6 @@
 package racingcar.controller;
 
-import racingcar.domain.Game;
+import racingcar.domain.RacingGame;
 import racingcar.service.RacingGameService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -10,7 +10,7 @@ public class RacingGameController {
     private final RacingGameService gameService = new RacingGameService();
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    private Game game;
+    private RacingGame game;
 
     public void run() {
         gameInit();

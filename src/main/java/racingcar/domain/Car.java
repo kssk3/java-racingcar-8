@@ -24,6 +24,14 @@ public class Car {
         return this.position.equals(maxPosition);
     }
 
+    public CarName getCarName() {
+        return carName;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {

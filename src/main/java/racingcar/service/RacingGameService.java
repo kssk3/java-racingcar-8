@@ -11,7 +11,15 @@ import racingcar.domain.RacingRound;
 
 public class RacingGameService {
 
-    private final CarNameValidator carNameValidator = new CarNameValidator();
+    private final CarNameValidator carNameValidator;
+
+    public RacingGameService(CarNameValidator carNameValidator) {
+        this.carNameValidator = carNameValidator;
+    }
+
+    public void validateCarNames(List<String> names) {
+        carNameValidator.validate(names);
+    }
 
     public RacingGame CreateGame(List<String> names, int rounds) {
 

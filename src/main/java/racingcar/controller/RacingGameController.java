@@ -32,8 +32,14 @@ public class RacingGameController {
 
     private RacingGame initializeGame() {
         List<String> names = inputCarNames();
+        validateCarNames(names);
+
         int roundCount = inputRoundCount();
         return gameService.CreateGame(names, roundCount);
+    }
+
+    private void validateCarNames(List<String> names) {
+        gameService.validateCarNames(names);
     }
 
     private void playGames(RacingGame game) {

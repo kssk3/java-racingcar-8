@@ -2,6 +2,7 @@ package racingcar.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import racingcar.domain.Car;
 import racingcar.domain.Cars;
 import racingcar.domain.RacingGame;
 import racingcar.domain.RacingRound;
@@ -26,7 +27,7 @@ public class RacingGameController {
     public void run() {
         RacingGame game = initializeGame();
         playGames(game);
-
+        gameResult(game);
     }
 
     private RacingGame initializeGame() {
@@ -43,6 +44,14 @@ public class RacingGameController {
             outputView.printRoundResult(game.getCars());
             outputView.printNewLine();
         }
+    }
+
+    private void gameResult(RacingGame game) {
+        List<String> list = game.getWinners()
+                .stream()
+                .map(car -> car.getCarName().getName())
+                .toList();
+        outputView.printResult(list);
     }
 
     private List<String> inputCarNames() {

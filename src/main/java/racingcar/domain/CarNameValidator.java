@@ -1,10 +1,8 @@
-package racingcar.service;
+package racingcar.domain;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import racingcar.domain.Car;
-import racingcar.domain.CarName;
 
 public class CarNameValidator {
 
@@ -24,7 +22,7 @@ public class CarNameValidator {
         Set<String> uniqueNames = new HashSet<>();
         for (String name : names) {
             if (!uniqueNames.add(name)) {
-                throw new IllegalArgumentException("중복된 이름이 존재합니다." + name);
+                throw new IllegalArgumentException("중복된 이름이 존재합니다: " + name);
             }
         }
     }

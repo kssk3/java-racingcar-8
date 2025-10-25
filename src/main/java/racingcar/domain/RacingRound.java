@@ -20,7 +20,7 @@ public class RacingRound {
     }
 
     public int getValue() {
-        return value;
+        return this.value;
     }
 
     @Override

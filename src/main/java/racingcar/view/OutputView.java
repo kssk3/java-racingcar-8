@@ -15,13 +15,12 @@ public class OutputView {
     }
 
     public void printGameStatus() {
+        printNewLine();
         System.out.println("실행 결과");
     }
 
     public void printRoundResult(List<Car> cars) {
-        for (Car car : cars) {
-            System.out.println(car.toString());
-        }
+        cars.forEach(Car::toString);
     }
 
     public void printResult(String winners) {

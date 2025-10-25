@@ -11,11 +11,10 @@ import racingcar.domain.RacingRound;
 
 public class RacingGameService {
 
-    private static final String DELIMITER = ",";
+
     private final CarNameValidator carNameValidator = new CarNameValidator();
 
-    public RacingGame CreateGame(String input, int rounds) {
-        List<String> names = parseNames(input);
+    public RacingGame CreateGame(List<String> names, int rounds) {
 
         List<Car> cars = names.stream()
                 .map(CarName::new)
@@ -23,12 +22,6 @@ public class RacingGameService {
                 .toList();
 
         return new RacingGame(new Cars(cars), new RacingRound(rounds));
-    }
-
-    private List<String> parseNames(String input) {
-        return Arrays.stream(input.split(DELIMITER))
-                .map(String::trim)
-                .toList();
     }
 
     public int parseRacingRound(String input) {

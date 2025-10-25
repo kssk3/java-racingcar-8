@@ -1,13 +1,13 @@
 package racingcar.controller;
 
 import racingcar.domain.Game;
-import racingcar.service.GameService;
+import racingcar.service.RacingGameService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
-public class GameController {
+public class RacingGameController {
 
-    private final GameService gameService = new GameService();
+    private final RacingGameService gameService = new RacingGameService();
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private Game game;

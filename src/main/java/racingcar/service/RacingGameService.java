@@ -5,7 +5,7 @@ import java.util.List;
 import racingcar.domain.Car;
 import racingcar.domain.Game;
 
-public class GameService {
+public class RacingGameService {
 
     private static final String DEFAULT_DELIMITER = ",";
     private Game game = new Game();

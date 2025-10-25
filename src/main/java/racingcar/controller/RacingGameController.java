@@ -24,7 +24,8 @@ public class RacingGameController {
     }
 
     public void run() {
-        RacingGame racingGame = initializeGame();
+        RacingGame game = initializeGame();
+        playGames(game);
 
     }
 
@@ -32,6 +33,16 @@ public class RacingGameController {
         List<String> names = inputCarNames();
         int roundCount = inputRoundCount();
         return gameService.CreateGame(names, roundCount);
+    }
+
+    private void playGames(RacingGame game) {
+        outputView.printGameStatus();
+
+        for(int i = 0; i < game.getRacingRound().getValue(); i++) {
+            game.playRound();
+            outputView.printRoundResult(game.getCars());
+            outputView.printNewLine();
+        }
     }
 
     private List<String> inputCarNames() {

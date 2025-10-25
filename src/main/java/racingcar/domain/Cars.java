@@ -1,6 +1,5 @@
 package racingcar.domain;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -35,8 +34,8 @@ public class Cars {
                 .orElse(Position.initial());
     }
 
-    public List<Car> getCars() {
-        return Collections.unmodifiableList(cars);
+    public List<Car> getCarList() {
+        return this.cars;
     }
 
     public int size() {

@@ -75,14 +75,6 @@ public class RacingGameController {
     private int inputRoundCount() {
         outputView.printGameCounting();
         String rounds = inputView.readLine();
-        return parseRoundCount(rounds);
-    }
-
-    private int parseRoundCount(String rounds) {
-        try{
-            return Integer.parseInt(rounds);
-        }catch (NumberFormatException e){
-            throw new NumberFormatException("숫자가 아닌 다른값이 입력되었습니다.");
-        }
+        return gameService.parseRacingRound(rounds);
     }
 }
